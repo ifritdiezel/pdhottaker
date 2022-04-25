@@ -28,7 +28,8 @@ client.on("messageCreate", async message => {
     message.channel.createWebhook('PD Hot take generator', {avatar: null}).then(webhook => {
       webhookdb[message.guildId+message.channelId] = webhook.id;
       fs.writeFile('./webhookdb.json', JSON.stringify(webhookdb), err => {if(err) throw err;});
-      message.channel.send("Created a webhook here!");
+      try{message.channel.send("Created a webhook here!");} catch(error){return;};
+      console.log("Registered a new channel");
     })
   }
 
