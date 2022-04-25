@@ -1,8 +1,9 @@
-const { Client, Intents, WebhookClient } = require('discord.js');
+const { Client, Intents } = require('discord.js');
 const client = new Client({ intents: [Intents.FLAGS.GUILD_MESSAGES + Intents.FLAGS.GUILDS ] });
 
-const config = require("./config.json");
-const webhookClient = new WebhookClient({ url: config.webhookurl });
+const { bottoken } = require("./config.json");
+const webhookdb = require("./webhookdb")
+const fs = require('fs');
 const strings = require("./strings.json");
 
 Array.prototype.random = function () {
@@ -12,13 +13,33 @@ Array.prototype.random = function () {
 client.on("messageCreate", async message => {
   if (message.author.bot) return;
   if (message.webhookID) return;
+  if (message.channel.type != 'GUILD_TEXT');
+  if (!message.content.startsWith("!opinion")) return;
+  let webhook;
+
+  try{
+	   const webhooks = await message.channel.fetchWebhooks();
+     webhook = webhooks.find(wh => wh.id === webhookdb[message.guildId+message.channelId]);
+   } catch (error){
+     return;
+   }
+
+  if ((message.content == "!opinionsetup") && !webhook){
+    message.channel.createWebhook('PD Hot take generator', {avatar: null}).then(webhook => {
+      webhookdb[message.guildId+message.channelId] = webhook.id;
+      fs.writeFile('./webhookdb.json', JSON.stringify(webhookdb), err => {if(err) throw err;});
+      message.channel.send("Created a webhook here!");
+    })
+  }
+
+  if (!webhook) return;
 
   if (message.content ==  "!opinion") {
     let itemcategory = Math.floor((Math.random()*strings.items.length));
     let itemsincategory = strings.items[itemcategory].length;
     let firstitemkey = Math.floor( (Math.random()*itemsincategory));
     let seconditemkey = ( firstitemkey + Math.floor((Math.random()*itemsincategory)) - 1 ) % itemsincategory;
-    webhookClient.send({
+    webhook.send({
       content: strings.openers.random() + " " + strings.items[itemcategory][firstitemkey] + " " + strings.comparisons.random() + " "+ strings.items[itemcategory][seconditemkey] + " " + strings.conditions.random() + ". " + strings.finishers.random(),
   	   username: strings.nicknames.random(),
      });
@@ -30,4 +51,4 @@ client.once('ready', () => {
 	console.log('Ready!');
 });
 
-client.login(config.bottoken);
+client.login(bottoken);
