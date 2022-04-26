@@ -40,13 +40,23 @@ client.on("messageCreate", async message => {
     let itemsincategory = strings.items[itemcategory].length;
     let firstitemkey = Math.floor( (Math.random()*itemsincategory));
     let seconditemkey = ( firstitemkey + Math.floor((Math.random()*itemsincategory)) - 1 ) % itemsincategory;
+
+    content = [
+      strings.genericopeners.random() + " " + strings.items[itemcategory][firstitemkey] + " " + strings.comparisons.random() + " "+ strings.items[itemcategory][seconditemkey] + " " + strings.conditions.random() + ". " + capitalize(strings.finishers.random()),
+      capitalize(strings.opinionopeners.random()) + " " + strings.items[itemcategory][firstitemkey] + " " + strings.balancesuggestions.random()
+    ].random();
+
     webhook.send({
-      content: strings.openers.random() + " " + strings.items[itemcategory][firstitemkey] + " " + strings.comparisons.random() + " "+ strings.items[itemcategory][seconditemkey] + " " + strings.conditions.random() + ". " + strings.finishers.random(),
-  	   username: strings.nicknames.random(),
+      content: content,
+       username: strings.nicknames.random(),
      });
   }
 
 });
+
+function capitalize(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+}
 
 client.once('ready', () => {
 	console.log('Ready!');
