@@ -39,11 +39,12 @@ client.on("messageCreate", async message => {
     let itemcategory = Math.floor((Math.random()*strings.items.length));
     let itemsincategory = strings.items[itemcategory].length;
     let firstitemkey = Math.floor( (Math.random()*itemsincategory));
-    let seconditemkey = ( firstitemkey + Math.floor((Math.random()*itemsincategory)) - 1 ) % itemsincategory;
+    let seconditemkey = (firstitemkey + Math.floor( Math.random()*itemsincategory) + 1) % itemsincategory;
 
     content = [
       strings.genericopeners.random() + " " + strings.items[itemcategory][firstitemkey] + " " + strings.comparisons.random() + " "+ strings.items[itemcategory][seconditemkey] + " " + strings.conditions.random() + ". " + capitalize(strings.finishers.random()),
-      capitalize(strings.opinionopeners.random()) + " " + strings.items[itemcategory][firstitemkey] + " " + strings.balancesuggestions.random()
+      capitalize(strings.opinionopeners.random()) + " " + strings.items[itemcategory][firstitemkey] + " " + strings.balancesuggestions.random(),
+      strings.genericopeners.random() + " " + strings.subclasses.random()  + " sucks unless you have " + strings.items[itemcategory][firstitemkey]
     ].random();
 
     webhook.send({
