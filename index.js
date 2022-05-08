@@ -13,7 +13,7 @@ Array.prototype.random = function () {
 client.on("messageCreate", async message => {
   if (message.author.bot) return;
   if (message.webhookID) return;
-  if (message.channel.type != 'GUILD_TEXT');
+  if (message.channel.type != 'GUILD_TEXT') return;
   if (!message.content.startsWith("!opinion")) return;
   let webhook;
 
@@ -21,7 +21,7 @@ client.on("messageCreate", async message => {
 	   const webhooks = await message.channel.fetchWebhooks();
      webhook = webhooks.find(wh => wh.id === webhookdb[message.guildId+message.channelId]);
    } catch (error){
-     return;
+     webhook = false;
    }
 
   if ((message.content == "!opinionsetup") && !webhook){
@@ -30,22 +30,25 @@ client.on("messageCreate", async message => {
       fs.writeFile('./webhookdb.json', JSON.stringify(webhookdb), err => {if(err) throw err;});
       try{message.channel.send("Created a webhook here!");} catch(error){return;};
       console.log("Registered a new channel");
-    })
+    });
+    return;
   }
 
-  if (!webhook) return;
+  if (!webhook) {
+      try{message.channel.send(`Run !opinionsetup to add the bot to this channel. If it still doesn't work make sure the bot has the "Manage webhooks" permission.`)} catch (error) {return;}
+      return;
+  };
 
   if (message.content ==  "!opinion") {
-    let itemcategory = Math.floor((Math.random()*strings.items.length));
-    let itemsincategory = strings.items[itemcategory].length;
-    let firstitemkey = Math.floor( (Math.random()*itemsincategory));
-    let seconditemkey = (firstitemkey + Math.floor( Math.random()*itemsincategory)) % itemsincategory;
+    function generate(){
+      let itemcategory = Math.floor((Math.random()*strings.items.length));
+      let shuffleditems = shuffle(strings.items[itemcategory]);
 
-    content = [
-      strings.genericopeners.random() + " " + strings.items[itemcategory][firstitemkey] + " " + strings.comparisons.random() + " "+ strings.items[itemcategory][seconditemkey] + " " + strings.conditions.random() + ". " + capitalize(strings.finishers.random()),
-      capitalize(strings.opinionopeners.random()) + " " + strings.items[itemcategory][firstitemkey] + " " + strings.balancesuggestions.random(),
-      strings.genericopeners.random() + " " + strings.subclasses.random()  + " sucks unless you have " + strings.items[itemcategory][firstitemkey]
-    ].random();
+      content = [
+        strings.genericopeners.random() + " " + shuffleditems[0] + " " + strings.comparisons.random() + " "+ shuffleditems[1] + " " + strings.conditions.random() + ". " + capitalize(strings.finishers.random()),
+        capitalize(strings.opinionopeners.random()) + " " + shuffleditems[0] + " " + strings.balancesuggestions.random(),
+        strings.genericopeners.random() + " " + strings.subclasses.random()  + " sucks unless you have " + shuffleditems[0]
+      ].random();
 
     webhook.send({
       content: content,
@@ -54,6 +57,16 @@ client.on("messageCreate", async message => {
   }
 
 });
+
+function shuffle(array) {
+  for (var i = array.length - 1; i > 0; i--) {
+    var j = Math.floor(Math.random() * (i + 1));
+    var temp = array[i];
+    array[i] = array[j];
+    array[j] = temp;
+  }
+  return array;
+}
 
 function capitalize(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);

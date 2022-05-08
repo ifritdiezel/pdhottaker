@@ -10,7 +10,13 @@
   <body>
      <b> <p id="quote"> Press the generate button to begin </p> </b>
      <i> <p id="author"> - ifritdiezel </p> </i>
-     <button type="button" id="generatebutton" onclick="generate()">Generate</button> <br>
+     <button type="button" id="generatebutton" onclick="generate()">Generate</button>
+
+     <!-- sorry for this -->
+     <br> <br> <br> <br> <br> <br>
+
+     <a href="https://github.com/ifritdiezel/pdhottaker">Source code</a> <a href="https://discord.com/api/oauth2/authorize?client_id=968217115146485842&permissions=536873984&scope=bot">Discord bot</a>
+
 
     <script>
       Array.prototype.random = function () {
@@ -21,16 +27,24 @@
       return string.charAt(0).toUpperCase() + string.slice(1);
       }
 
+      function shuffle(array) {
+        for (var i = array.length - 1; i > 0; i--) {
+          var j = Math.floor(Math.random() * (i + 1));
+          var temp = array[i];
+          array[i] = array[j];
+          array[j] = temp;
+        }
+        return array;
+      }
+
       function generate(){
         let itemcategory = Math.floor((Math.random()*strings.items.length));
-        let itemsincategory = strings.items[itemcategory].length;
-        let firstitemkey = Math.floor( (Math.random()*itemsincategory));
-        let seconditemkey = (firstitemkey + Math.floor( Math.random()*itemsincategory)) % itemsincategory;
+        let shuffleditems = shuffle(strings.items[itemcategory]);
 
         content = [
-          strings.genericopeners.random() + " " + strings.items[itemcategory][firstitemkey] + " " + strings.comparisons.random() + " "+ strings.items[itemcategory][seconditemkey] + " " + strings.conditions.random() + ". " + capitalize(strings.finishers.random()),
-          capitalize(strings.opinionopeners.random()) + " " + strings.items[itemcategory][firstitemkey] + " " + strings.balancesuggestions.random(),
-          strings.genericopeners.random() + " " + strings.subclasses.random()  + " sucks unless you have " + strings.items[itemcategory][firstitemkey]
+          strings.genericopeners.random() + " " + shuffleditems[0] + " " + strings.comparisons.random() + " "+ shuffleditems[1] + " " + strings.conditions.random() + ". " + capitalize(strings.finishers.random()),
+          capitalize(strings.opinionopeners.random()) + " " + shuffleditems[0] + " " + strings.balancesuggestions.random(),
+          strings.genericopeners.random() + " " + strings.subclasses.random()  + " sucks unless you have " + shuffleditems[0]
         ].random();
 
 
