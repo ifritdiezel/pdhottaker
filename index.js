@@ -40,21 +40,22 @@ client.on("messageCreate", async message => {
   };
 
   if (message.content ==  "!opinion") {
-    function generate(){
-      let itemcategory = Math.floor((Math.random()*strings.items.length));
-      let shuffleditems = shuffle(strings.items[itemcategory]);
+    let itemcategory = Math.floor((Math.random()*strings.items.length));
+    let shuffleditems = shuffle(strings.items[itemcategory]);
 
-      content = [
-        strings.genericopeners.random() + " " + shuffleditems[0] + " " + strings.comparisons.random() + " "+ shuffleditems[1] + " " + strings.conditions.random() + ". " + capitalize(strings.finishers.random()),
-        capitalize(strings.opinionopeners.random()) + " " + shuffleditems[0] + " " + strings.balancesuggestions.random(),
-        strings.genericopeners.random() + " " + strings.subclasses.random()  + " sucks unless you have " + shuffleditems[0]
-      ].random();
+    content = [
+      strings.genericopeners.random() + " " + shuffleditems[0] + " " + strings.comparisons.random() + " "+ shuffleditems[1] + " " + strings.conditions.random() + ". " + capitalize(strings.finishers.random()),
+      capitalize(strings.opinionopeners.random()) + " " + shuffleditems[0] + " " + strings.balancesuggestions.random(),
+      strings.genericopeners.random() + " " + strings.subclasses.random()  + " sucks unless you have " + shuffleditems[0]
+    ].random();
 
     webhook.send({
       content: content,
-       username: strings.nicknames.random(),
-     });
-  }
+      username: strings.nicknames.random(),
+    });
+
+    }
+
 
 });
 
