@@ -10,7 +10,7 @@
   <body>
      <b> <p id="quote"> Press the generate button to begin </p> </b>
      <i> <p id="author"> - ifritdiezel </p> </i>
-     <button type="button" id="generatebutton" onclick="generate()">Generate</button>
+     <button type="button" id="generatebutton" onclick="generate()">Generate</button> <button onclick="copytocb()">Copy</button>
 
      <!-- sorry for this -->
      <br> <br> <br> <br> <br> <br>
@@ -27,6 +27,10 @@
       return string.charAt(0).toUpperCase() + string.slice(1);
       }
 
+      function copytocb(){
+        navigator.clipboard.writeText(window.tocopy);
+      }
+
       function shuffle(array) {
         for (var i = array.length - 1; i > 0; i--) {
           var j = Math.floor(Math.random() * (i + 1));
@@ -41,19 +45,20 @@
         let itemcategory = Math.floor((Math.random()*strings.items.length));
         let shuffleditems = shuffle(strings.items[itemcategory]);
 
-        content = [
+        let content = [
           strings.genericopeners.random() + " " + shuffleditems[0] + " " + strings.comparisons.random() + " "+ shuffleditems[1] + " " + strings.conditions.random() + ". " + capitalize(strings.finishers.random()),
           capitalize(strings.opinionopeners.random()) + " " + shuffleditems[0] + " " + strings.balancesuggestions.random(),
           strings.genericopeners.random() + " " + strings.subclasses.random()  + " sucks unless you have " + shuffleditems[0]
         ].random();
+        let nickname = "― " + strings.nicknames.random();
 
-
+        window.tocopy = content + `\n` + nickname;
         quote.innerHTML  = content;
-        author.innerHTML = "― " + strings.nicknames.random();
+        author.innerHTML = nickname;
       }
 
 
-      strings = {
+      const strings = {
         "items": [
           ["ring of accuracy","ring of elements","ring of energy","ring of evasion","ring of force","ring of furor","ring of haste","ring of might","ring of sharpshooting","ring of tenacity","ring of wealth","any other ring", "nothing"],
           ["magic missile","lightning","disintegration","fireblast","corrosion","any utility wand","blast wave","warding","frost","prismatic light","living earth","corruption","regrowth","transfusion","any other damage wand", "nothing"],
