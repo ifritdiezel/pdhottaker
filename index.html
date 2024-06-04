@@ -9,7 +9,7 @@
 
   <body>
      <b> <p id="quote"> Press the generate button to begin </p> </b>
-     <i> <p id="author"> - ifritdiezel </p> </i>
+     <i> <p id="author"> - ifritdiezel, expanded by TrashboxBobylev </p> </i>
      <button type="button" id="generatebutton" onclick="generate()">Generate</button> <button onclick="copytocb()">Copy</button>
 
      <!-- sorry for this -->
@@ -60,20 +60,21 @@
 
       const strings = {
         "items": [
-          ["ring of accuracy","ring of elements","ring of energy","ring of evasion","ring of force","ring of furor","ring of haste","ring of might","ring of sharpshooting","ring of tenacity","ring of wealth","any other ring", "nothing"],
-          ["magic missile","lightning","disintegration","fireblast","corrosion","any utility wand","blast wave","warding","frost","prismatic light","living earth","corruption","regrowth","transfusion","any other damage wand", "nothing"],
-          ["obfuscation","swiftness","viscosity","potential","brimstone","stone","entanglement","repulsion","camouflage","flow","affection","anti-magic","thorns","literally any other glyph","no glyph"],
-          ["worn shortsword","dagger","a pair of studded gloves","mage's staff","shortsword","hand axe","spear","dirk","quarterstaff","sword","mace","scimitar","sai","round shield","whip","longsword","battle axe","flail","assassin's blade","runic blade","crossbow","greatsword","war hammer","glaive","greataxe","greatshield","stone gauntlet","no weapon","any weapon"],
-          ["chilling","shocking","blazing","kinetic","elastic","unstable","blocking","projecting","blooming","lucky","grim","vampiric","corrupting","no enchantment"]
-        ],
-        "genericopeners":["In actual gameplay","Imo","Imho","I think","It's mathematically proven that","In my experience","A pro player told me","People on reddit told me","I've heard somewhere","Love it or hate it but","Hate me all you want but","cope.","Everyone who played this game for longer than a month knows that"],
-        "opinionopeners":["i think","here we believe that", "imho","imo","i believe","everyone thinks","my opinion is that","i agree that","as i see it,","from my point of view","personally i think that","after beating the game i can say that","after 1000+ runs i think"],
-        "comparisons":["is much better than","is a lot worse than","performs better than","works better than","is vastly superior to","is abysmal compared to","is disgusting unlike","pales in comparison to","is trash compared to","is a worse version of","is an improvement over","is remarkable as opposed to"],
-        "conditions":["when you're playing huntress","when you're going as warrior","when you're just trying to have fun", "when you're playing mage","when you're playing rogue","as mage","as huntress","as rogue","as warrior","with challenges off","in 0chal","in allchal","in rkpd","if you're a skilled player","for new players","if you know how to use it","if you're lucky enough","if you're into that","no matter what"],
-        "finishers":["this game is so unbalanced","i blame evan","i know this is controversial","arguable but still","hard to disagree","still needs a nerf imo","still needs a buff though","prove me wrong","it's a working strategy","love the balance","meta over fun, huh","not sure why everyone disagrees","harsh cold truth","but what do i know"],
-        "balancesuggestions":["needs a buff the most","has to be nerfed asap","should be buffed a lot","must be nerfed ","needs something changed about it","should be removed from the game entirely","needs to have a lategame version","could be reworked","should be made more interactive","needs to be tweaked ","should be removed from challenge games","should be reverted to its vanilla state","needs a better description","should be guaranteed in every game"],
-        "subclasses":["berserker","gladiator","freerunner","assassin","battlemage","warlock","warden","sniper","warrior","mage","rogue","huntress"],
-        "nicknames":["WarriorMain3000","Assassin>>>>>>","huntress supremacy!","warden lover","00-Evan","john","Bob","Bob's alt","shopkeeper step on me","casual dweller","Sniper sux fight me","PLEASE nerf GOO"]
+		["ring of accuracy","ring of elements","ring of energy","ring of evasion","ring of force","ring of furor","ring of haste","ring of might","ring of sharpshooting","ring of tenacity","ring of wealth","any other ring", "nothing"],
+		["magic missile","lightning","disintegration","fireblast","corrosion","any utility wand","blast wave","warding","frost","prismatic light","living earth","corruption","regrowth","transfusion","any other damage wand", "nothing"],
+		["obfuscation","swiftness","viscosity","potential","brimstone","stone","entanglement","repulsion","camouflage","flow","affection","anti-magic","thorns","literally any other glyph","no glyph"],
+		["worn shortsword","dagger","a pair of studded gloves","mage's staff","shortsword","hand axe","spear","dirk","quarterstaff","sword","mace","scimitar","sai","round shield","whip","longsword","battle axe","flail","assassin's blade","runic blade","crossbow","greatsword","war hammer","glaive","greataxe","greatshield","stone gauntlet","rapier","katana","no weapon","any weapon"],
+		["chilling","shocking","blazing","kinetic","elastic","unstable","blocking","projecting","blooming","lucky","grim","vampiric","corrupting","no enchantment"],
+		["shared upgrades","swift equip","improvised projectiles","backup barrier","sucker punch","farsight","shared enchantment","silent steps","mystical meal","light cloak","rejuvenating steps","heightened senses","inscribed power","shield battery","excess charge","lethal momentum","enraged catalyst","survivalist's intuition","lethal haste","twin upgrades","unencumbered spirit"]
+	  ],
+	  "genericopeners":["In actual gameplay","Imo","Imho","I think","It's mathematically proven that","In my experience","A pro player told me","People on reddit told me","I've heard somewhere","Love it or hate it but","Hate me all you want but","cope.","Everyone who played this game for longer than a month knows that","From info on discord,","From info on lemmy,","From info on reddit,"],
+	  "opinionopeners":["i think","here we believe that", "imho","imo","i believe","everyone thinks","my opinion is that","i agree that","as i see it,","from my point of view","personally i think that","after beating the game i can say that","after 1000+ runs i think","after playing Experienced","after winning as every class"],
+	  "comparisons":["is much better than","is a lot worse than","performs better than","works better than","is vastly superior to","is abysmal compared to","is disgusting unlike","pales in comparison to","is trash compared to","is a worse version of","is an improvement over","is remarkable as opposed to","should be much better","is unfairly stronger than","is unfairly weaker than"],
+	  "conditions":["when you're playing huntress","when you're going as warrior","when you're just trying to have fun", "when you're playing mage","when you're playing rogue","when you're trying as duelist","as mage","as huntress","as rogue","as warrior","as duelist","with challenges off","in 0chal","in allchal","in rkpd","in rka","in exppd","in pixel towers","if you're a skilled player","if you're a good player","for new players","if you know how to use it","if you're lucky enough","if you're into that","no matter what","if you're a bad player"],
+	  "finishers":["this game is so unbalanced","i blame evan","i blame bobylev","i know this is controversial","arguable but still","hard to disagree","still needs a nerf imo","still needs a buff though","prove me wrong","it's a working strategy","love the balance","meta over fun, huh","not sure why everyone disagrees","harsh cold truth","but what do i know","this is so stupid","correct if I am wrong"],
+	  "balancesuggestions":["needs a buff the most","has to be nerfed asap","should be buffed a lot","must be nerfed ","needs something changed about it","should be removed from the game entirely","needs to have a lategame version","could be reworked","should be made more interactive","needs to be tweaked ","should be removed from challenge games","should be reverted to its vanilla state","needs a better description","should be guaranteed in every game","should be adjusted"],
+	  "subclasses":["berserker","gladiator","freerunner","assassin","battlemage","warlock","warden","sniper","champion","monk","warrior","mage","rogue","huntress","duelist"],
+	  "nicknames":["WarriorMain3000","Assassin>>>>>>","huntress supremacy!","warden lover","00-Evan","john","Bob","Bob's alt","TrashboxBobylev","admin","Monk>>>>>>","Battlefighter2002","shopkeeper step on me","casual dweller","Sniper sux fight me","PLEASE nerf GOO","Cleric when","monk hater","duelisty","lunge lunge lunge"]
       }
 
 
